@@ -4,7 +4,7 @@
     import axios from "axios";  
     import {useState,useEffect} from "react"
     import "../stl.css"
-import { deleteTodo } from "../../../backend/controller/todoController";
+    import { deleteTodo } from "../../../backend/controller/todoController";
 
     function Home(){
         const [todos,setTodos] = useState([])
@@ -16,14 +16,14 @@ import { deleteTodo } from "../../../backend/controller/todoController";
             const fetchTodos=async()=>{
                 try{
                     setLoading(true)
-                const response = await axios.get("http://localhost:3000/todo/fetch",{
+                const response = await axios.get("http://localhost:9999/todo/fetch",{
                     withCredentials:true, // acccept backend response
                     headers:{
                         "content-Type":"application/json",
                     },
                 });
                 
-                 console.log(response.data)
+                 console.log(response.data.todos)
                  setTodos(response.data.todos)
                  setError(null)
                 } catch(error){
@@ -40,7 +40,7 @@ import { deleteTodo } from "../../../backend/controller/todoController";
     if(!newTodos) return;
 
     try{
-    const response = await axios.post("http://localhost:3000/todo/create",
+    const response = await axios.post("http://localhost:9999/todo/create",
         {
             text:newTodos,
             completed:false
@@ -64,14 +64,14 @@ import { deleteTodo } from "../../../backend/controller/todoController";
     const TodoStatus = async(id)=>{
         const todo= todos.find((t)=>t._id===id)
         try{
-        const response = await axios.put(`http://localhost:3000/todo/update/${id}`,
+        const response = await axios.put(`http://localhost:9999/todo/update/${id}`,
             {
     ...todo, // old todo
     completed:!todo.completed
         },{
             withCredentials:true
         })
-        setTodos(todo.map((t)=>t._id===id?response.data:t))
+        setTodos(todos.map((t)=>t._id===id?response.data:t))
         } catch(error){
             console.log(error)
             setError("failed to find todo status")
@@ -80,7 +80,7 @@ import { deleteTodo } from "../../../backend/controller/todoController";
 
     const DeleteTodo=async(id)=>{
         try{
-    await axios.delete(`http://localhost:3000/todo/delete/${id}`,{
+    await axios.delete(`http://localhost:9999/todo/delete/${id}`,{
     withCredentials:true
 
     })
@@ -89,7 +89,6 @@ import { deleteTodo } from "../../../backend/controller/todoController";
             console.log(error)
             setError("could not delete todo ") // setting current deleted todo not equal to todo inside DB
         }
-
     }
         return(
 

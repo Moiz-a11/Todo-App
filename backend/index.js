@@ -7,9 +7,11 @@ import todoRouters from "./routes/todo.route.js"
 import userRouters from "./routes/user.route.js"
 import cors from "cors" // for connecting frontend in backend
 const app = express();
-const port = 3000;
+
 app.use(express.json())
 dotenv.config()
+
+const port = process.env.PORT || 9999;
 const DB_URI = process.env.MONGODB_URI
 
 app.use(cors({
