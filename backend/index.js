@@ -11,11 +11,11 @@ const app = express();
 app.use(express.json())
 dotenv.config()
 
-const port = process.env.PORT || 9999;
+const port = 9999;
 const DB_URI = process.env.MONGODB_URI
 
-app.use(cors({
-  origin:process.env.FRONTEND_URL,
+app.use(cors({ // allow frontend backend requests
+  origin:process.env.FRONTEND_URL, //frontend se request aayengi 
   credentials:true, //  for  allowing request
   methods:"GET,POST,PUT,DELETE",
   allowedHeaders:["Content-Type","Authorization"],
@@ -30,9 +30,9 @@ app.listen(port, () => {
 
 try{
 mongoose.connect(DB_URI)
-console.log(
-"connected"
-)
+.then(()=>{
+console.log("connected")})
+.catch((err) => console.error("MongoDB connection error:", err));
 } catch(e){
   console.log(e)
 }

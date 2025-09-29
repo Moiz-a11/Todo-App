@@ -4,7 +4,7 @@
     import axios from "axios";  
     import {useState,useEffect} from "react"
     import "../stl.css"
-    import { deleteTodo } from "../../../backend/controller/todoController";
+    //import { deleteTodo } from "../backend/controller/todoController";
 
     function Home(){
         const [todos,setTodos] = useState([])
@@ -12,14 +12,15 @@
         const [loading ,setLoading] =useState(false)
         const [newTodos,setNewTodos] = useState("")
 
-        useEffect(()=>{
+        useEffect(()=>{ // use effect becoz handeling real time changes
             const fetchTodos=async()=>{
                 try{
                     setLoading(true)
                 const response = await axios.get("http://localhost:9999/todo/fetch",{
                     withCredentials:true, // acccept backend response
+
                     headers:{
-                        "content-Type":"application/json",
+                        "content-Type":"application/json",// json data fetch kar rahe
                     },
                 });
                 
@@ -71,7 +72,7 @@
         },{
             withCredentials:true
         })
-        setTodos(todos.map((t)=>t._id===id?response.data:t))
+        setTodos(todos.map((t)=>t._id===id?response.data.todo:t))
         } catch(error){
             console.log(error)
             setError("failed to find todo status")
@@ -87,11 +88,10 @@
     setTodos(todos.filter((t)=>t._id!==id))
         } catch(error){
             console.log(error)
-            setError("could not delete todo ") // setting current deleted todo not equal to todo inside DB
+            setError("could not delete todo") // setting current deleted todo not equal to todo inside DB
         }
     }
         return(
-
             <div className="d-flex vh-100 vw-80 bg-pink border border-2 border-black flex-column justify-content-center align-items-center ">
     <div className=" d-flex w-100  justify-content-center flex-column align-items-center" >
         <h1>Todo App</h1>
@@ -99,19 +99,19 @@
     <span  className="d-flex mt-5 w-100" ><input className="form-control  offset-4 me-2" type="text"/><button className="btn btn-primary">Add</button></span>
     </div>
 
-    <ul className="mt-5 m-10 w-100" >
+ <ul className="mt-5 m-10 w-100" >
 
         {todos.map((todo,index)=>(
-             <li key={todo._id|| index} className="mb-3 w-40 " >
-            <div className="d-flex justify-content-center align-items-center w-100 gap-5 "><input type="checkbox"/>
+             <li key={todo._id || index} className="mb-3 w-40 " >
+            <div className="d-flex justify-content-center align-items-center w-100 gap-5 ">
+                <input checked={todo.completed} onChange={()=>TodoStatus(todo._id)} type="checkbox"/>
             <span className="" > {todo.text}</span>
             <button className="btn btn-danger" onClick={DeleteTodo} >Delete</button>
             </div>
         </li> 
         ))}
-        
-   
-    </ul>
+
+    </ul> 
     
     <div className="d-flex justify-content-center flex-column align-items-center mt-5 "><p>0 Todo Remaining</p>
     <button className="btn btn-success" >Logout</button></div>
