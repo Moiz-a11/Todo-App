@@ -24,9 +24,10 @@
                     },
                 });
                 
-                 console.log(response.data.todos)
+                 //console.log(response.data.todos)
                  setTodos(response.data.todos)
                  setError(null)
+
                 } catch(error){
                     setError("failed to fetch data")
                 } finally{
@@ -38,6 +39,8 @@
         },[]);
 
     const createTodo =async()=>{
+
+     
     if(!newTodos) return;
 
     try{
@@ -65,19 +68,30 @@
     const TodoStatus = async(id)=>{
         const todo= todos.find((t)=>t._id===id)
         try{
+            
         const response = await axios.put(`http://localhost:9999/todo/update/${id}`,
+
             {
+
     ...todo, // old todo
-    completed:!todo.completed
+
+    completed: !todo.completed,
+
         },{
-            withCredentials:true
-        })
-        setTodos(todos.map((t)=>t._id===id?response.data.todo:t))
+            withCredentials:true,
+        });
+
+ console.log(response.data)
+
+        setTodos(todos.map((t) => t._id === id ? response.data.todo : t))
+       
         } catch(error){
             console.log(error)
             setError("failed to find todo status")
         }
+        
     }
+   
 
     const DeleteTodo=async(id)=>{
         try{
@@ -105,8 +119,8 @@
              <li key={todo._id || index} className="mb-3 w-40 " >
             <div className="d-flex justify-content-center align-items-center w-100 gap-5 ">
                 <input checked={todo.completed} onChange={()=>TodoStatus(todo._id)} type="checkbox"/>
-            <span className="" > {todo.text}</span>
-            <button className="btn btn-danger" onClick={DeleteTodo} >Delete</button>
+            <span className=""> {todo.text}</span>
+            <button onClick={()=>DeleteTodo(todo._id)} className="btn btn-danger">Delete</button>
             </div>
         </li> 
         ))}

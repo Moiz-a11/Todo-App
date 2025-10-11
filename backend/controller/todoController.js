@@ -34,7 +34,10 @@ try{
  let todo = await Todo.findByIdAndUpdate(req.params.id,req.body,{
         new:true,
     })
-    res.status(201).json(({message:"todo updated successfully"},todo))
+      res.status(201).json({
+      message: "Todo updated successfully",
+      todo, // now frontend will receive updated todo and message
+    });
 
 } catch(error){
     res.status(400).json({message:"error occuring in todo deletion"}) 
