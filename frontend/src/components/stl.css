@@ -1,0 +1,29 @@
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  background-color: #f8f9fa;
+  transition: all 0.2s ease-in-out;
+}
+
+.todo-item:hover {
+  background-color: #e9ecef;
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.todo-completed {
+  background-color: #d4edda; /* light green */
+  border-left: 5px solid #28a745;
+}
+
+.todo-item .btn-outline-danger {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.todo-item .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
