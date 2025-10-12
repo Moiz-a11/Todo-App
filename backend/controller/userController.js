@@ -13,6 +13,7 @@ username:z.string().min(3,{message:"username atleast three charactor"}),
 
 
  export const  signupController=async (req,res)=>{
+  
     let {username,email,password} = req.body;
    const hashPassword = await bcrypt.hash(password,10)
    
