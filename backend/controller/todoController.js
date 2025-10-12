@@ -12,8 +12,11 @@ const newTodo = new Todo({
 
 
 let sampleTodo =  await newTodo.save()
-res.status(201).json({message:"todo created "},sampleTodo)
-// console.log(sampleTodo)
+res.status(201).json({
+      message: "todo created",
+      todo: sampleTodo   // ✅ include the saved todo here
+    });
+
 }
 
 

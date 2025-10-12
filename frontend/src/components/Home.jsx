@@ -55,7 +55,9 @@
     },
 
     )
-    setTodos([...todos,response.data]) // old todo,s + newTodos
+ setTodos([...todos, response.data.todo])
+console.log(response.data)
+ // old todo,s + newTodos
     setNewTodos("")
     }catch(error){
         console.log(error)
@@ -110,7 +112,15 @@
     <div className=" d-flex w-100  justify-content-center flex-column align-items-center" >
         <h1>Todo App</h1>
 
-    <span  className="d-flex mt-5 w-100" ><input className="form-control  offset-4 me-2" type="text"/><button className="btn btn-primary">Add</button></span>
+    <span  className="d-flex mt-5 w-100" >
+        
+        <input 
+        value={newTodos}
+         onKeyPress={(e)=>e.key=="Enter" && createTodo()}
+          onChange={(e) => setNewTodos(e.target.value)} className="form-control  offset-4 me-2" type="text"/>
+         
+    <button onClick={createTodo} className="btn btn-primary">Add</button>
+    </span>
     </div>
 
  <ul className="mt-5 m-10 w-100" >
@@ -119,8 +129,8 @@
              <li key={todo._id || index} className="mb-3 w-40 " >
             <div className="d-flex justify-content-center align-items-center w-100 gap-5 ">
                 <input checked={todo.completed} onChange={()=>TodoStatus(todo._id)} type="checkbox"/>
-            <span className=""> {todo.text}</span>
-            <button onClick={()=>DeleteTodo(todo._id)} className="btn btn-danger">Delete</button>
+            <span className={`${ todo.completed?"text-decoration-line-through":""}`}> {todo.text}</span>
+            <button onClick={()=>DeleteTodo(todo._id)} className="btn btn-danger">Delete</button>            
             </div>
         </li> 
         ))}
