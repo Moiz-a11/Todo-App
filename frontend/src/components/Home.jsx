@@ -4,10 +4,21 @@
     import axios from "axios";  
     import {useState,useEffect} from "react"
     import "../stl.css"
+import {toast}  from "react-hot-toast"
 
     import "./stl.css"
+import toast from "react-hot-toast";
     //import { deleteTodo } from "../backend/controller/todoController";
+const logout =  async ()=>{
+  try{
+    axios.get()
 
+  } catch(error){
+    toast.error("error in logedout")
+
+  }
+
+}
     function Home(){
         const [todos,setTodos] = useState([])
         const [error ,setError] =useState(null)
@@ -168,7 +179,7 @@ console.log(response.data)
 
  
     <div className="d-flex justify-content-center flex-column align-items-center mt-5 "> <p>{todos.filter(todo => !todo.completed).length} remaining todos</p>
-    <button className="btn btn-success" >Logout</button></div>
+    <button onClick={()=> logout()} className="btn btn-success" >Logout</button></div>
 
     </div>
 

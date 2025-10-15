@@ -1,22 +1,28 @@
 import React from "react";
-import {Link} from "react-router-dom"
+
 import { useState } from "react";
 import {toast}  from "react-hot-toast"
 import axios from "axios";
+import {Link ,useNavigate} from "react-router-dom"
 
 function SignUp() {  
 const [username,setUserName] = useState("");
 const [email,setEmail] = useState("")
 const [password,setPassword] = useState("")
 
+
+const navigateTo = useNavigate()
   const handleRegister= async(e)=>{
     e.preventDefault();
+
     try{
 const {data} = await axios.post("http://localhost:9999/user/signup",{
   username,
   email,
   password,
+
 },{
+
   withCredentials:true,
   headers:{
    "Content-Type": "application/json"
@@ -24,17 +30,21 @@ const {data} = await axios.post("http://localhost:9999/user/signup",{
 })
 console.log(data)
  toast.success(data.message || "user registered successfull")
+ setUserName("")
+ setEmail("")
+ setPassword("")
+ navigateTo("/login")
+
     } catch(error){
       console.log(error)
       toast.error(error.response.data.errors || "user Registration failed") 
     }
-    
-
+  
   }
   return (
 
     <div className=" d-flex flex-column align-items-center justify-content-center signup-parent">
-      <div className="d-flex flex-column align-items-center justify-content-center signupContainer w-100 rounded-3 shadow-lg bg-white">
+      <div className="d-flex flex-column align-items-center justify-content-center signupContainer w-100 rounded-3 shadow-lg bg-white mt-5">
         <h2 className="text-center fst-italic fw-bold">SignUp</h2>
 
         <form onSubmit={handleRegister} action="">

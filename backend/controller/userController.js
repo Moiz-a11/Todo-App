@@ -158,7 +158,7 @@ export const loginController = async (req, res) => {
       return res.status(400).json({ message: "User not found or password incorrect" });
 
     const { password: pwd, ...userData } = user._doc; // exclude password
-    const token = generateTockenAndSaveInCookies (user._id, res);
+    const token = generateTokenAndSaveInCookies (user._id, res);
 
     res.status(200).json({ message: "Login successfully", user: userData, token });
 

@@ -38,6 +38,7 @@ res.status(201).json({message:"finded successfully",todos})
 
 
 }
+
  export const updateTodo = async(req,res)=>{
 try{
  let todo = await Todo.findByIdAndUpdate(req.params.id,req.body,{
