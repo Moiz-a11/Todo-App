@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom"
 import { useState } from "react";
+import {toast}  from "react-hot-toast"
 import axios from "axios";
 
 function SignUp() {  
@@ -22,10 +23,10 @@ const {data} = await axios.post("http://localhost:9999/user/signup",{
   }
 })
 console.log(data)
-alert("user register successfully")
+ toast.success(data.message || "user registered successfull")
     } catch(error){
       console.log(error)
-      alert("error") 
+      toast.error(error.response.data.errors || "user Registration failed") 
     }
     
 

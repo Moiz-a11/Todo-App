@@ -6,6 +6,7 @@ import Logout from "./components/Logout"
 import PageNotFound from "./components/pageNotFound"
 import{ Routes ,Route } from "react-router-dom"
 import SignUp  from "./components/SignUp"
+import {Toaster} from "react-hot-toast" // for dispalying messages
 function App() {
  
   return(
@@ -17,6 +18,7 @@ function App() {
          <Route path="/logout" element={<Logout/>}/>
          <Route path="*" element={<PageNotFound/>}/>
       </Routes>
+      <Toaster/>
 
     </div>
   )
