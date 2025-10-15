@@ -3,8 +3,7 @@
 import Todo from "../models/todo.js"
 
 export const createTodo=async(req,res)=> {
-
-
+try{
 const newTodo = new Todo({
     text:req.body.text,
     completed:req.body.completed
@@ -16,6 +15,13 @@ res.status(201).json({
       message: "todo created",
       todo: sampleTodo   // ✅ include the saved todo here
     });
+
+} catch(error){
+    res.status(400).jsos({message:"todo not created"})
+
+}
+
+
 
 }
 

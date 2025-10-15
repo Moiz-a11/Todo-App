@@ -6,9 +6,11 @@ import mongoose from "mongoose"
 import todoRouters from "./routes/todo.route.js"
 import userRouters from "./routes/user.route.js"
 import cors from "cors" // for connecting frontend in backend
+import cookieParser from  "cookie-parser"
 const app = express();
 
 app.use(express.json())
+app.use(cookieParser())
 dotenv.config()
 
 const port = 9999;
