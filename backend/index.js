@@ -1,5 +1,4 @@
 
-
 import express from  'express'
 import dotenv from "dotenv"
 import mongoose from "mongoose"
@@ -7,6 +6,7 @@ import todoRouters from "./routes/todo.route.js"
 import userRouters from "./routes/user.route.js"
 import cors from "cors" // for connecting frontend in backend
 import cookieParser from  "cookie-parser"
+
 const app = express();
 
 app.use(express.json())
@@ -21,6 +21,7 @@ app.use(cors({ // allow frontend backend requests
   credentials:true, //  for  allowing request
   methods:"GET,POST,PUT,DELETE",
   allowedHeaders:["Content-Type","Authorization"],
+  
 }))
 
 app.use("/todo",todoRouters)

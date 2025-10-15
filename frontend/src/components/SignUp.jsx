@@ -30,6 +30,7 @@ const {data} = await axios.post("http://localhost:9999/user/signup",{
 })
 console.log(data)
  toast.success(data.message || "user registered successfull")
+  localStorage.setItem("jwt",data.token)
  setUserName("")
  setEmail("")
  setPassword("")

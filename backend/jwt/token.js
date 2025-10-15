@@ -6,7 +6,7 @@ export const generateTokenAndSaveInCookies = (userId, res) => {
   const token = jwt.sign(
     { userId },
     process.env.JWT_SECRET_KEY, // ✅ fixed spelling
-    { expiresIn: "1d" }        // ✅ valid timespan
+    { expiresIn: "1d" }        //  ✅ valid timespan
   );
 
   // 2️⃣ Save in cookie

@@ -4,17 +4,24 @@
     import axios from "axios";  
     import {useState,useEffect} from "react"
     import "../stl.css"
-import {toast}  from "react-hot-toast"
+    import {toast}  from "react-hot-toast"
+     import { useNavigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
     import "./stl.css"
-import toast from "react-hot-toast";
+
     //import { deleteTodo } from "../backend/controller/todoController";
 const logout =  async ()=>{
   try{
-    axios.get()
+   await axios.get("http://localhost:9999/user/logout")
+toast.success("user loged out successfully")
+localStorage.removeItem("jwt");
+{/* <Navigate to={"/login"}/> */}
+
 
   } catch(error){
-    toast.error("error in logedout")
+
+    toast.error("error in logedout");
 
   }
 

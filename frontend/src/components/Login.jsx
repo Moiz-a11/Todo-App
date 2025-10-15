@@ -13,12 +13,12 @@ const [password,setPassword] = useState("")
 
 
 const navigateTo = useNavigate()
-  const handleRegister= async(e)=>{
+    const handleRegister= async(e)=>{
     e.preventDefault();
 
     try{
 const {data} = await axios.post("http://localhost:9999/user/login",{
- 
+  
   email,
   password,
 
@@ -31,6 +31,7 @@ const {data} = await axios.post("http://localhost:9999/user/login",{
 })
 console.log(data)
  toast.success(data.message || " login successfull")
+ localStorage.setItem("jwt",data.token)
 
  setEmail("")
  setPassword("")
