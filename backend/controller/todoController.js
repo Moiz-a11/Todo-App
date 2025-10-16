@@ -17,7 +17,7 @@ res.status(201).json({
     });
 
 } catch(error){
-    res.status(400).jsos({message:"todo not created"})
+    res.status(400).json({message:"todo not created"})
 
 }
 

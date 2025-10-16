@@ -1,11 +1,11 @@
 import express from "express"
 
 import {createTodo , todoFind ,updateTodo,deleteTodo} from "../controller/todoController.js"
-
+import {authenticate} from  "../middleware/authorize.js"
 
 const router = express.Router();
 
-router.post("/create",createTodo);
+router.post("/create",authenticate,createTodo);
      
 router.get("/fetch",todoFind);
 
