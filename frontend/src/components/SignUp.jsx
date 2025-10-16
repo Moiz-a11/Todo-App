@@ -31,10 +31,11 @@ const {data} = await axios.post("http://localhost:9999/user/signup",{
 console.log(data)
  toast.success(data.message || "user registered successfull")
   localStorage.setItem("jwt",data.token)
+  navigateTo("/login")
  setUserName("")
  setEmail("")
  setPassword("")
- navigateTo("/login")
+ 
 
     } catch(error){
       console.log(error)

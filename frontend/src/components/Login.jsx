@@ -13,7 +13,7 @@ const [password,setPassword] = useState("")
 
 
 const navigateTo = useNavigate()
-    const handleRegister= async(e)=>{
+    const handleLogin= async(e)=>{
     e.preventDefault();
 
     try{
@@ -32,10 +32,10 @@ const {data} = await axios.post("http://localhost:9999/user/login",{
 console.log(data)
  toast.success(data.message || " login successfull")
  localStorage.setItem("jwt",data.token)
-
+ navigateTo("/")
  setEmail("")
  setPassword("")
- navigateTo("/")
+
 
     } catch(error){
       console.log(error)
@@ -50,9 +50,9 @@ console.log(data)
     <div className=" d-flex flex-column align-items-center justify-content-center signup-parent">
       <div className="d-flex flex-column align-items-center justify-content-center signupContainer w-100 rounded-3 shadow-lg bg-white mt-5">
         <h2>Welcome In Todos</h2>
-        <h2 className="text-center fst-italic fw-bold">SignUp</h2>
+        <h2 className="text-center fst-italic fw-bold">LogIn</h2>
 
-        <form onSubmit={handleRegister} action="">
+        <form onSubmit={handleLogin} action="">
          
 
           {/* email */}

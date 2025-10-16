@@ -16,7 +16,7 @@ export const signupController = async (req, res) => {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password)
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ errors: "All fields are required" });
 
     const validation = userSchema.safeParse({ username, email, password });
     if (!validation.success) {
@@ -26,7 +26,7 @@ export const signupController = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser)
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ errors: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
@@ -52,12 +52,12 @@ export const loginController = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password)
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ errors: "All fields are required" });
 
     const user = await User.findOne({ email }).select("+password");
     if (!user || !(await bcrypt.compare(password, user.password)))
-      return res.status(400).json({ message: "User not found or password incorrect" });
-
+      return res.status(400).json({ errors: "User not found or password incorrect" });
+  
     const { password: pwd, ...userData } = user._doc; // exclude password
     const token = generateTokenAndSaveInCookies (user._id, res);
 

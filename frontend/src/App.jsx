@@ -4,9 +4,10 @@ import Home from "./components/Home"
 import Login from "./components/Login"
 import Logout from "./components/Logout"
 import PageNotFound from "./components/pageNotFound"
-import{ Routes ,Route } from "react-router-dom"
+import { Routes ,Route } from "react-router-dom"
 import SignUp  from "./components/SignUp"
 import {Toaster} from "react-hot-toast" // for dispalying messages
+import { Navigate } from "react-router-dom"
 const token =localStorage.getItem("jwt") // token which is in local storage
 function App() {
  
