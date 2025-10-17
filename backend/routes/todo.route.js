@@ -9,8 +9,8 @@ router.post("/create",authenticate,createTodo);
      
 router.get("/fetch",authenticate,todoFind);
 
-router.put("/update/:id",updateTodo);
+router.put("/update/:id",authenticate,updateTodo);
 
-router.delete("/delete/:id",deleteTodo);
+router.delete("/delete/:id",authenticate,deleteTodo);
 
 export default router;

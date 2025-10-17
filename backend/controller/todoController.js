@@ -30,7 +30,7 @@ res.status(201).json({
 
 export  const todoFind =async (req,res)=>{
     try{
-let todos = await Todo.find({user:req.user._id})
+let todos = await Todo.find({user : req.user._id})
 res.status(201).json({message:"finded successfully",todos}) 
     } catch(error){
         console.log(error)

@@ -1,19 +1,22 @@
 import jwt from "jsonwebtoken"
-
-export const authenticate = (req,res,next)=>{
+import User from "../models/user.js"
+export const authenticate =async (req,res,next)=>{
     const token = req.cookies.jwt;
     console.log(token)
-    // if(!token){
-    //     return res.status(401).json({message:"Unauthorize"})
-    // }
+    if(!token){
+        return res.status(401).json({message:"Unauthorize"})
+    }
 
-    // try{
-    //   const decoded = jwt.verify(token,process.env.JWT_SECRET_KEY)
-    //   console.log(decoded);
-
-    // } catch(error){
-    //     return res.status(401).json({message:" " + error.message})
-    // }
+    try{
+      const decoded = jwt.verify(token,process.env.JWT_SECRET_KEY)
+      req.user= await User.findById(decoded.userId);
+      console.log(decoded);
+    //    req.user = { _id: decoded.userId };
     next();
 
+
+    } catch(error){
+        return res.status(401).json({message:" " + error.message})
+    }
+     
 }
