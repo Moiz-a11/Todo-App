@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post("/create",authenticate,createTodo);
      
-router.get("/fetch",todoFind);
+router.get("/fetch",authenticate,todoFind);
 
 router.put("/update/:id",updateTodo);
 
